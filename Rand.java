@@ -30,11 +30,16 @@ public class Rand {
     }
 
     public static int randInt(int min, int max) {
-        return rand.nextInt(min, max+1);
+        return rand.nextInt(max - min + 1) + min;
     }
 
+    // Simulate Gaussian distribution using Box-Muller transform
     public static double randGauss(double mean, double stddev) {
-        return rand.nextGaussian(mean, stddev);
+        double u1 = rand.nextDouble();
+        double u2 = rand.nextDouble();
+        double r = Math.sqrt(-2 * Math.log(u1));
+        double theta = 2 * Math.PI * u2;
+        return mean + stddev * r * Math.cos(theta);
     }
 
     public static void main(String[] args) {
